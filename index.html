@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Qianhui Wang Portfolio</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
       color: #333;
       display: flex;
       flex-direction: column;
@@ -23,9 +24,8 @@
       margin-bottom: 20px;
     }
     .pdf-container {
-      width: 90%;
-      height: 90vh;
-      margin-bottom: 20px;
+      flex-grow: 1;
+      width: 100%;
     }
     iframe {
       width: 100%;
@@ -40,7 +40,7 @@
       text-decoration: none;
       border-radius: 5px;
       font-size: 16px;
-      margin-bottom: 40px;
+      margin: 20px 0;
     }
     a:hover {
       background-color: #45a049;
@@ -50,11 +50,11 @@
 <body>
   <h1>Qianhui Wang Portfolio</h1>
   <p>Please view my portfolio below. You can also download it.</p>
-  
+
   <div class="pdf-container">
     <iframe src="qianhui_wang_portfolio.pdf"></iframe>
   </div>
-  
+
   <a href="qianhui_wang_portfolio.pdf" download>Download Portfolio</a>
 </body>
 </html>
