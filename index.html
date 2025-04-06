@@ -22,6 +22,7 @@
     }
     p {
       margin-bottom: 20px;
+      text-align: center;
     }
     .pdf-container {
       width: 90%;
@@ -32,6 +33,8 @@
       width: 100%;
       height: 100%;
       border: none;
+      transform: scale(1);
+      transform-origin: top left;
     }
     a {
       display: inline-block;
@@ -51,8 +54,14 @@
     @media (max-width: 768px) {
       .pdf-container {
         width: 100%;
-        height: 80vh;
-        margin-bottom: 20px;
+        height: 100vh;
+        overflow: auto;
+      }
+      iframe {
+        width: 768px; /* PDF 宽度基准 */
+        height: 100vh;
+        transform: scale(calc(100vw / 768));
+        transform-origin: top left;
       }
     }
   </style>
