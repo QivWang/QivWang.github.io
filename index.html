@@ -33,10 +33,8 @@
       width: 100%;
       height: 100%;
       border: none;
-      transform: scale(1);
-      transform-origin: top left;
     }
-    a {
+    a.button {
       display: inline-block;
       padding: 10px 20px;
       background-color: #4CAF50;
@@ -46,25 +44,23 @@
       font-size: 16px;
       margin-bottom: 40px;
     }
-    a:hover {
+    a.button:hover {
       background-color: #45a049;
     }
 
     /* 📱 手机端优化 */
     @media (max-width: 768px) {
       .pdf-container {
-        width: 100%;
-        height: 100vh;
-        overflow: auto;
-      }
-      iframe {
-        width: 768px; /* PDF 宽度基准 */
-        height: 100vh;
-        transform: scale(calc(100vw / 768));
-        transform-origin: top left;
+        display: none; /* 手机端隐藏 iframe */
       }
     }
   </style>
+  <script>
+    // 手机端检测，自动跳转打开 PDF 文件
+    if (window.innerWidth <= 768) {
+      window.location.href = "qianhui_wang_portfolio.pdf";
+    }
+  </script>
 </head>
 <body>
   <h1>Qianhui Wang Portfolio</h1>
@@ -74,6 +70,6 @@
     <iframe src="qianhui_wang_portfolio.pdf"></iframe>
   </div>
 
-  <a href="qianhui_wang_portfolio.pdf" download>Download Portfolio</a>
+  <a class="button" href="qianhui_wang_portfolio.pdf" download>Download Portfolio</a>
 </body>
 </html>
