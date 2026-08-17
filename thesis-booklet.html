@@ -26,15 +26,30 @@
       margin: 0;
     }
 
+    .cover-page {
+      width: auto !important;
+      max-width: 100%;
+      max-height: 100vh;
+      margin: 0 auto;
+    }
+
+    .cover-wrapper {
+      width: 100%;
+      height: 100vh;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
     .video-section {
       width: 100%;
       min-height: 100vh;
       background: #000;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       box-sizing: border-box;
       padding: 40px;
     }
@@ -50,10 +65,9 @@
 
 <body>
 
-  <!-- PDF pages will appear here -->
   <div id="pdf-container"></div>
 
-  <!-- Fog -->
+  <!-- Fog Video -->
   <section class="video-section">
     <video controls playsinline>
       <source src="Fog.MP4" type="video/mp4">
@@ -61,7 +75,7 @@
     </video>
   </section>
 
-  <!-- Projector -->
+  <!-- Projector Video -->
   <section class="video-section">
     <video controls playsinline>
       <source src="Projector.mp4" type="video/mp4">
@@ -79,38 +93,33 @@
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.149/pdf.worker.min.mjs";
 
     const pdfUrl = "thesis-booklet.pdf";
-
     const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+    const container = document.getElementById("pdf-container");
 
-    const container =
-      document.getElementById("pdf-container");
+    for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
 
+      const page = await pdf.getPage(pageNumber);
+      const viewport = page.getViewport({ scale: 2 });
 
-    for (let pageNumber = 1;
-         pageNumber <= pdf.numPages;
-         pageNumber++) {
-
-      const page =
-        await pdf.getPage(pageNumber);
-
-      const viewport =
-        page.getViewport({ scale: 2 });
-
-      const canvas =
-        document.createElement("canvas");
-
+      const canvas = document.createElement("canvas");
       canvas.className = "pdf-page";
 
-      const context =
-        canvas.getContext("2d");
+      const context = canvas.getContext("2d");
 
-      canvas.width =
-        viewport.width;
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
 
-      canvas.height =
-        viewport.height;
+      if (pageNumber === 1) {
+        canvas.classList.add("cover-page");
 
-      container.appendChild(canvas);
+        const wrapper = document.createElement("div");
+        wrapper.className = "cover-wrapper";
+
+        wrapper.appendChild(canvas);
+        container.appendChild(wrapper);
+      } else {
+        container.appendChild(canvas);
+      }
 
       await page.render({
         canvasContext: context,
